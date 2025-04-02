@@ -12,6 +12,11 @@ namespace CSharpMon.Core
 {
     public static class Resources
     {
+        /// <summary>
+        /// Loads Species file data and convert to <c>Species</c> Object
+        /// </summary>
+        /// <param name="speciesName"></param>
+        /// <returns><c>Species?</c></returns>
         public static Species? GetSpecies(string speciesName) {
             
             string path = Path.Combine(AppContext.BaseDirectory, "Resources", "Jsons","Species",$"{speciesName.ToUpper()}.json");
