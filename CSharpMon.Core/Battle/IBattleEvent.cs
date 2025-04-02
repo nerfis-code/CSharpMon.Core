@@ -8,7 +8,7 @@ namespace CSharpMon.Core.Battle
 {
     public interface IBattleEvent
     {
-        List<Action<IBattleContext>> Actions { get; set; }
+        List<IBattleAction> Actions { get; set; }
         string Name { get; }
         List<Action<IBattleContext>> SortActionsByPriority();
         async Task<bool> Run(IBattleContext BattleContext) {
