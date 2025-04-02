@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Threading.Tasks;
+using System.Drawing;
+
+namespace CSharpMon.Core
+{
+    public static class Resources
+    {
+        public static Species? GetSpecies(string speciesName) {
+            
+            string path = Path.Combine(AppContext.BaseDirectory, "Resources", "Jsons","Species",$"{speciesName.ToUpper()}.json");
+            string jsonString;
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
+            try
+            {
+                jsonString = File.ReadAllText(path);
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+            return JsonSerializer.Deserialize<Species>(jsonString, options);
+        }
+        public static byte[] GetImageBuffer(string imagePath)
+        {
+            string path = Path.Combine(AppContext.BaseDirectory, "Resources", "Images", imagePath);
+            return File.Exists(path) ? File.ReadAllBytes(path) : throw new FileNotFoundException(path);
+        }
+    }
+}
