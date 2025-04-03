@@ -10,11 +10,9 @@ namespace CSharpMon.Core.Battle
     public interface IBattleScene
     {
         IBattleContext _context { get; }
-        List<Mon> PlayerParty { set; get; }
-        List<Mon> EnemyParty { set; get; }
         IBattleEvent[] _initialEvents {set; get;}
         IBattleEvent[] _eventLoop {set; get; }
-        HandleBattleEvent HandleEvent {  set; get; }
+        HandleEvent<IBattleEvent> HandleEvent {  set; get; }
 
         async Task Loop() { }
     }

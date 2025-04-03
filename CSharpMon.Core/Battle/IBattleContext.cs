@@ -9,8 +9,9 @@ namespace CSharpMon.Core.Battle
     public interface IBattleContext
     {
         IBattleScene Scene { get; }
-        HandleBattleEvent HandleBattleEvent { get; }
+        HandleEvent<IBattleEvent> HandleBattleEvent { get; }
         List<Mon> PlayerParty { get; set;  }
         List<Mon> EnemyParty { get; set; }
+        BattleStatus BattleStatus { get; set; }
     }
 }

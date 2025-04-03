@@ -8,11 +8,10 @@ namespace CSharpMon.Core.Battle
 {
     public interface IBattleEvent
     {
-        List<IBattleAction> Actions { get; set; }
-        string Name { get; }
-        List<Action<IBattleContext>> SortActionsByPriority();
-        async Task<bool> Run(IBattleContext BattleContext) {
-            return true;
-        }
+        string Type { get; }
+        bool ShouldExecute(IBattleContext BattleContext);
+        bool ShouldEliminated(IBattleContext BattleContext);
+
+        async Task Run(IBattleContext BattleContext) {}
     }
 }

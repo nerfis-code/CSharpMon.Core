@@ -1,6 +1,6 @@
 namespace CSharpMon.Core.Battle
 {
-    public enum BattleResult
+    public enum BattleStatus
     {
         InProgress,
         PlayerVictory,
