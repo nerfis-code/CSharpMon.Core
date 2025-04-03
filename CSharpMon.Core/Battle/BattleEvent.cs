@@ -12,7 +12,7 @@ namespace CSharpMon.Core.Battle
         public string ID { get; set; }
         public Func<bool> ShouldRun { get; set; }
         public Func<bool> ShouldBeEliminated { get; set; }
-        public bool OneShot { get; set; }
+        public bool OneShot { get; set; } = true;
         public Action Run { get; set; } 
     }
 }

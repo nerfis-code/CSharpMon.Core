@@ -5,7 +5,7 @@ namespace CSharpMon.Core.Battle.Events
 {
     public class BattleEventCollection
     {
-        private static BattleEventCollection _instance;
+        private static BattleEventCollection? _instance;
         private static readonly object _lock = new object();
 
         public static BattleEventCollection Instance 
@@ -45,21 +45,31 @@ namespace CSharpMon.Core.Battle.Events
                 ShouldBeEliminated = () => false,
                 OneShot = true,
                 Run = () => {
-                    _battleContext.HandleBattleEvent.AddEvent(TestBattle("pikachu"));
                 }
             };
         }
-        public BattleEvent TestBattle(string pokename)
+        public BattleEvent EnemyReveal()
         {
             return new BattleEvent
             {
                 Type = BattleEventType.EnemyReveal,
-                ShouldRun = () => true,
-                ShouldBeEliminated = () => false,
-                OneShot = true,
-                Run =  () => { }
+                Run =  () => { 
+                    
+                }
             };
         }
 
     }
 }
+
+// public BattleEvent TestBattle(string pokename)
+//     {
+//         return new BattleEvent
+//         {
+//             Type = BattleEventType.EnemyReveal,
+//             ShouldRun = () => true,
+//             ShouldBeEliminated = () => false,
+//             OneShot = true,
+//             Run =  () => { }
+//         };
+//     }

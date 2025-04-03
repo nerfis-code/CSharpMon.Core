@@ -31,7 +31,7 @@ namespace CSharpMon.Core
             {
                 jsonString = File.ReadAllText(path);
             }
-            catch(Exception ex)
+            catch
             {
                 return null;
             }

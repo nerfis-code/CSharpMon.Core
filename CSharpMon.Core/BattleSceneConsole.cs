@@ -1,4 +1,5 @@
-namespace CSharpMon.Core.Battle
+using CSharpMon.Core.Battle;
+namespace CSharpMon.Core
 {
     public class BattleSceneConsole:  IBattleScene
     {
@@ -13,7 +14,7 @@ namespace CSharpMon.Core.Battle
             ctx.HandleBattleEvent = HandleEvent;
             HandleEvent.AddEventCollection(events);
         }
-        public async Task ShowMessage(string message = ""){
+        public void ShowMessage(string message = ""){
             Console.WriteLine(message);
         }
         public async Task Loop() 
