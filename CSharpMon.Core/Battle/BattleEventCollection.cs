@@ -58,6 +58,13 @@ namespace CSharpMon.Core.Battle.Events
                 }
             };
         }
+        public BattleEvent Custom(){
+            return new BattleEvent
+            {
+                Type = BattleEventType.StartBattle,
+                Run =  () => { }
+            };
+        }
 
     }
 }
