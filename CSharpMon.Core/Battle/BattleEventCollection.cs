@@ -44,9 +44,9 @@ namespace CSharpMon.Core.Battle.Events
                 ShouldRun = () => true,
                 ShouldBeEliminated = () => false,
                 OneShot = true,
-                Run = new Lazy<Task>(async () => {
+                Run = () => {
                     _battleContext.HandleBattleEvent.AddEvent(TestBattle("pikachu"));
-                })
+                }
             };
         }
         public BattleEvent TestBattle(string pokename)
@@ -57,7 +57,7 @@ namespace CSharpMon.Core.Battle.Events
                 ShouldRun = () => true,
                 ShouldBeEliminated = () => false,
                 OneShot = true,
-                Run = new Lazy<Task>(async () => { })
+                Run =  () => { }
             };
         }
 

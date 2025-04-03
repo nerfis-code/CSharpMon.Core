@@ -10,9 +10,9 @@ namespace CSharpMon.Core.Battle
     {
         public BattleEventType Type { get; set; }
         public string ID { get; set; }
-        public Func<bool> ShouldRun { get; set; } = () => { throw new NotImplementedException(); };
-        public Func<bool> ShouldBeEliminated { get; set; } = () => { throw new NotImplementedException(); };
+        public Func<bool> ShouldRun { get; set; }
+        public Func<bool> ShouldBeEliminated { get; set; }
         public bool OneShot { get; set; }
-        public Lazy<Task> Run { get; set; } // Run.value // new Lazy<Task<int>>(async () => await CalculateAsync());
+        public Action Run { get; set; } 
     }
 }

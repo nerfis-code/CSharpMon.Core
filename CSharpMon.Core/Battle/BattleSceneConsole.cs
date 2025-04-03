@@ -4,7 +4,7 @@ namespace CSharpMon.Core.Battle
     {
         public BattleContext Context { get; set; }
         public HandleEvent<BattleEvent> HandleEvent {  set; get; }
-        public BattleEvent CurrentBattleEvent {  set; get; }
+        public BattleEvent? CurrentBattleEvent {  set; get; }
         public BattleSceneConsole(BattleContext ctx, BattleEvent[] events) 
         {
             Context = ctx;
@@ -18,8 +18,8 @@ namespace CSharpMon.Core.Battle
         }
         public async Task Loop() 
         {
-            foreach (var e in HandleEvent.Execute()){
-                await e.Run.Value;
+            foreach (var e in HandleEvent.GetEventsToExecute()){
+                e.Run?.Invoke();
             }
         }
 

@@ -11,6 +11,6 @@ namespace CSharpMon.Core.Battle
         protected List<T> _events = new List<T>();
         public abstract HandleEvent<T> AddEvent(T battleEvent);
         public abstract HandleEvent<T> AddEventCollection(T[] battleEvent);
-        public abstract IEnumerable<T> Execute();
+        public abstract IEnumerable<T> GetEventsToExecute();
     }
 }
