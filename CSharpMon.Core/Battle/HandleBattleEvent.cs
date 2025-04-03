@@ -1,9 +1,8 @@
 namespace CSharpMon.Core.Battle
 {
-    public class HandleBattleEvent: HandleEvent<IBattleEvent>
+    public class HandleBattleEvent: HandleEvent<BattleEvent>
     {
-        private IBattleContext _battleContext;
-        public override HandleBattleEvent AddEvent(IBattleEvent battleEvent){
+        public override HandleBattleEvent AddEvent(BattleEvent battleEvent){
             for(int i = 0; i < _events.Count; i++){
                 if((int)_events[i].Type > (int)battleEvent.Type){
                     _events.Insert(i, battleEvent);
@@ -13,7 +12,7 @@ namespace CSharpMon.Core.Battle
             _events.Add(battleEvent);
             return this;
         }
-        public override HandleBattleEvent AddEventCollection(IBattleEvent[] battleEvents){
+        public override HandleBattleEvent AddEventCollection(BattleEvent[] battleEvents){
             var sortedBattleEvents = battleEvents.OrderBy(x => (int)x.Type).ToArray();
             for(int i = 0; i < _events.Count; i++){
                 if((int)_events[i].Type > (int)sortedBattleEvents[0].Type){
@@ -28,14 +27,15 @@ namespace CSharpMon.Core.Battle
             while(_events.Count > 0){
                 var battleEvent = _events[0];
                 //_events.RemoveAt(0);
-                if(battleEvent.ShouldRun(_battleContext)){
-                    await battleEvent.Run(_battleContext);
+                if(battleEvent.ShouldRun()){
+                    
+                    await battleEvent.Run.Value;
                     if (battleEvent.OneShot){
                        _events.Remove(battleEvent);
                        continue;
                     }
                 }
-                if(battleEvent.ShouldEliminated(_battleContext)){
+                if(battleEvent.ShouldBeEliminated()){
                     _events.Remove(battleEvent);
                 }
             }

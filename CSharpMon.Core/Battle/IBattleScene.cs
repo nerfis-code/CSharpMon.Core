@@ -9,11 +9,9 @@ namespace CSharpMon.Core.Battle
 {
     public interface IBattleScene
     {
-        IBattleContext _context { get; }
-        IBattleEvent[] _initialEvents {set; get;}
-        IBattleEvent[] _eventLoop {set; get; }
-        HandleEvent<IBattleEvent> HandleEvent {  set; get; }
-
+        BattleContext _context { get; }
+        HandleEvent<BattleEvent> HandleEvent {  set; get; }
+        async Task ShowMessage() {}
         async Task Loop() { }
     }
 }

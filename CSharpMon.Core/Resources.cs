@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace CSharpMon.Core
 {
