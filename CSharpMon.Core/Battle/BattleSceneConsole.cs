@@ -2,11 +2,26 @@ namespace CSharpMon.Core.Battle
 {
     public class BattleSceneConsole:  IBattleScene
     {
-        public BattleContext _context { get; }
+        public BattleContext Context { get; set; }
         public HandleEvent<BattleEvent> HandleEvent {  set; get; }
-        public async Task ShowMessage(string message = ""){
-            Console.WriteLine("Hello World!");
+        public BattleEvent CurrentBattleEvent {  set; get; }
+        public BattleSceneConsole(BattleContext ctx, BattleEvent[] events) 
+        {
+            Context = ctx;
+            ctx.Scene = this;
+            HandleEvent = new HandleBattleEvent();
+            ctx.HandleBattleEvent = HandleEvent;
+            HandleEvent.AddEventCollection(events);
         }
-        async Task Loop() { }
+        public async Task ShowMessage(string message = ""){
+            Console.WriteLine(message);
+        }
+        public async Task Loop() 
+        {
+            foreach (var e in HandleEvent.Execute()){
+                await e.Run.Value;
+            }
+        }
+
     }
 }

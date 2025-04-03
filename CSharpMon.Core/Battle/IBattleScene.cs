@@ -9,9 +9,10 @@ namespace CSharpMon.Core.Battle
 {
     public interface IBattleScene
     {
-        BattleContext _context { get; }
+        BattleContext Context { get; }
         HandleEvent<BattleEvent> HandleEvent {  set; get; }
-        async Task ShowMessage() {}
+        BattleEvent CurrentBattleEvent { get; set; }
+        async Task ShowMessage(string message) {}
         async Task Loop() { }
     }
 }

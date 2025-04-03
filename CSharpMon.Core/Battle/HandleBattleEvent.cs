@@ -23,20 +23,18 @@ namespace CSharpMon.Core.Battle
             _events.AddRange(sortedBattleEvents);
             return this;
         }
-        public override async Task Execute(){
+        public override IEnumerable<BattleEvent> Execute(){
             while(_events.Count > 0){
                 var battleEvent = _events[0];
-                //_events.RemoveAt(0);
-                if(battleEvent.ShouldRun()){
-                    
-                    await battleEvent.Run.Value;
-                    if (battleEvent.OneShot){
-                       _events.Remove(battleEvent);
-                       continue;
-                    }
-                }
-                if(battleEvent.ShouldBeEliminated()){
+
+                if (battleEvent.ShouldBeEliminated())
+                {
                     _events.Remove(battleEvent);
+                    continue;
+                }
+                if (battleEvent.ShouldRun()){
+                    if (battleEvent.OneShot) _events.Remove(battleEvent);
+                    yield return battleEvent;
                 }
             }
         }

@@ -41,10 +41,23 @@ namespace CSharpMon.Core.Battle.Events
             return new BattleEvent
             {
                 Type = BattleEventType.StartBattle,
-                ShouldRun = () => _battleContext != null,
-                ShouldBeEliminated = () => true,
+                ShouldRun = () => true,
+                ShouldBeEliminated = () => false,
                 OneShot = true,
-                Run = new Lazy<Task>(async () => {})
+                Run = new Lazy<Task>(async () => {
+                    _battleContext.HandleBattleEvent.AddEvent(TestBattle("pikachu"));
+                })
+            };
+        }
+        public BattleEvent TestBattle(string pokename)
+        {
+            return new BattleEvent
+            {
+                Type = BattleEventType.EnemyReveal,
+                ShouldRun = () => true,
+                ShouldBeEliminated = () => false,
+                OneShot = true,
+                Run = new Lazy<Task>(async () => { })
             };
         }
 
